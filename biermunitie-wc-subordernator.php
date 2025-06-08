@@ -1,10 +1,17 @@
 <?php
 /**
  * Plugin Name: Studio Rude Box WC Subordernator
- * Description: Voeg bij WooCommerce bestellingen de mogelijkheid toe om een relatie te leggen met een andere bestelling. Hierdoor ontstaan hoofd- en suborders.
- * Version: 2.0
+ * Plugin URI: https://github.com/StudioRudeBox/wc-subordernator-wp-plugin
+ * Description: Add the ability to link a WooCommerce order to another order, creating a parent–suborder relationship.
+ * Version: 2.1.0
  * Author: Studio Rude Box
+ * Author URI: https://studiorudebox.nl
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: srb-subordernator
+ * Domain Path: /languages
  */
+
 
 /**
  * Add a feature to WP-Admin by creating a custom number field in an order
@@ -47,7 +54,7 @@ if(is_admin())
 
         // add a section to the right column
         echo '<p class="form-field form-field-wide">';
-        echo '<label for="srb_subordernator_order_reference">Koppel een hoofd-bestellingen op ID (optioneel):</label>';
+        echo '<label for="srb_subordernator_order_reference">' . __('Link to a parent order ID (optional):', 'srb-subordernator') . '</label>';
 
         // display input field
         printf('<input type="number" name="srb_subordernator_order_reference" value="%s" min="0" placeholder="order ID" />',
@@ -87,7 +94,7 @@ if(is_admin())
         
     function srb_subordernator_add_custom_columns_head($columns): array
     {
-        $new_columns = array();     
+        $new_columns = [];     
         
         // add the ID column after the checkbox column
         foreach ($columns as $key => $column)
@@ -100,7 +107,7 @@ if(is_admin())
         }
         
         // add main order column
-        $new_columns['srb_subordernator_sub_order'] = 'Gekoppelde bestelling';
+        $new_columns['srb_subordernator_sub_order'] = __('Connected order', 'srb-subordernator');
        
         return $new_columns;
     }
@@ -150,7 +157,7 @@ if(is_admin())
             {
                 printf('<mark class="order-status"><a class="srb-subordernator-btn" href="%s" title="%s">%s</a></mark>',
                     get_edit_post_link($main_order_id),
-                    'Open de bovenliggende hoofdbestellingen',
+                    __('Open the parent orders', 'srb-subordernator'),
                     "#" . $main_order->get_order_number()
                 );
             }     
@@ -170,12 +177,14 @@ if(is_admin())
         if ($typenow == 'shop_order')
         {
             $selected = isset($_GET['main_sub_order_filter']) ? $_GET['main_sub_order_filter'] : '';
-            $options = array(
-                'main' => 'Hoofd-bestellingen',
-                'sub' => 'Sub-bestellingen',
-            );
+            $options = [
+                'main' => __('Main orders', 'srb-subordernator'),
+                'sub' => __('Sub orders', 'srb-subordernator')
+            ];            
+
             echo '<select name="main_sub_order_filter">';
-            echo '<option value="" ' . selected($selected, '', false) . '>Alle bestellingen</option>';
+            echo '<option value="" ' . selected($selected, '', false) . '>' . __('All orders', 'srb-subordernator') . '</option>';
+            
             foreach ($options as $key => $label)
             {
                 echo '<option value="' . esc_attr($key) . '" ' . selected($selected, $key, false) . '>' . esc_html($label) . '</option>';
@@ -192,7 +201,7 @@ if(is_admin())
      * @return void            return nothing
      */
     
-    function srb_subordernator_filter_query($query)
+    function srb_subordernator_filter_query($query): void
     {
         global $pagenow;
 
@@ -204,39 +213,39 @@ if(is_admin())
             // check if meta query is empty
             if (empty($meta_query))
             {
-                $meta_query = array();
+                $meta_query = [];
             }
 
             // check if custom sub / main order filter is used and add items to the meta query
             if ($main_sub_order_filter == 'sub')
             {
-                $meta_query[] = array(
+                $meta_query[] = [
                     'relation' => 'AND',
-                    array(
+                    [
                         'key' => SRB_POST_META_PARAM_NAME,
                         'value' => '',
                         'compare' => '!=',
-                    ),
-                    array(
+                    ],
+                    [
                         'key' => SRB_POST_META_PARAM_NAME,
                         'compare' => 'EXISTS',
-                    ),
-                );
+                    ],
+                ];
             }
             elseif ($main_sub_order_filter == 'main')
             {
-                $meta_query[] = array(
+                $meta_query[] = [
                     'relation' => 'OR',
-                    array(
+                    [
                         'key' => SRB_POST_META_PARAM_NAME,
                         'compare' => 'NOT EXISTS',
-                    ),
-                    array(
+                    ],
+                    [
                         'key' => SRB_POST_META_PARAM_NAME,
                         'value' => '',
                         'compare' => '=',
-                    ),
-                );
+                    ],
+                ];
             }
 
             // set new meta query

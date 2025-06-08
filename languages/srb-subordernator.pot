@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Studio Rude Box WC Subordernator 2.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/StudioRudeBox/wc-subordernator-wp-plugin\n"
+"POT-Creation-Date: 2025-06-08\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: ChatGPT\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+msgid "Link to a parent order ID (optional):"
+msgstr ""
+
+msgid "Connected order"
+msgstr ""
+
+msgid "Open the parent orders"
+msgstr ""
+
+msgid "Main orders"
+msgstr ""
+
+msgid "Sub orders"
+msgstr ""
+
+msgid "All orders"
+msgstr ""
