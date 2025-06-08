@@ -3,7 +3,7 @@
  * Plugin Name: Studio Rude Box WC Subordernator
  * Plugin URI: https://github.com/StudioRudeBox/wc-subordernator-wp-plugin
  * Description: Add the ability to link a WooCommerce order to another order, creating a parent–suborder relationship.
- * Version: 2.1.0
+ * Version: 2.1.1
  * Author: Studio Rude Box
  * Author URI: https://studiorudebox.nl
  * License: GPLv2 or later
