@@ -45,21 +45,11 @@ In the order overview:
 - **Author:** Studio Rude Box  
 - **License:** GPL-2.0-or-later
 
-## 🎨 Screenshots (optional)
-
-*You can add screenshots here to show the custom field, order overview icons, and filter in action.*
-
 ## 📂 Installation
 
 1. Upload the plugin folder to `/wp-content/plugins/`.
 2. Activate the plugin via the Plugins menu.
 3. Done! Go to WooCommerce > Orders to start linking.
-
-## 🚀 Roadmap Ideas
-
-- Support for bulk actions
-- Custom notes/logs on suborder links
-- Improved reporting or export of suborder relationships
 
 ## 💬 Feedback or Feature Requests?
 
