@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/*
+Plugin Name: Studio Rude Box WC Subordernator
+Description: Voeg bij bestaande orders de mogelijkheid toe om een relatie te leggen met een andere order. Hierbij ontstaan hoofd- en suborders.
+Version: 1.0
+Author: Studio Rude Box
+Author URI: https://studiorudebox.nl
+*/
+
+#srb_subordernator_order_id {
+    width: 1.5rem;
+}
+
+.order-status a.srb-subordernator-btn {
+    display: inline-block;
+    padding: 0 1em;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    color: #7f7f7f;
+}
+
+.order-status:hover {
+    background: #40403f;
+}
+
+.order-status:hover a.srb-subordernator-btn {
+    color: #e5e5e5;
+}
